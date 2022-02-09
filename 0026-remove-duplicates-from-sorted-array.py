@@ -1,14 +1,22 @@
+# https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+
+from typing import List
+
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        n = len(nums)
-        if n < 2:
-            return n
         p, q = 0, 1
-        while q < n:
-            while q < n and nums[p] == nums[q]:
+        while q < len(nums):
+            if nums[p] == nums[q]:
                 q += 1
-            if p + 1 < n and q < n:
+            else:
                 nums[p + 1] = nums[q]
-                p += 1
                 q += 1
-        return p + 1  
+                p += 1
+        return p + 1
+        
+
+
+if __name__ == '__main__':
+    print(Solution().removeDuplicates([0,1,2,2,3,3,4,5]))
+
+
