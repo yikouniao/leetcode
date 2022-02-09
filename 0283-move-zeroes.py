@@ -4,26 +4,19 @@ from typing import List
 
 class Solution:
     def moveZeroes(self, nums: List[int]) -> None:
-        p, q = 0, 1
+        p, q = 0, 0
         while q < len(nums):
-            if nums[q] == 0:
-                q += 1
-            elif nums[p] == 0:
+            if nums[q] != 0 and nums[p] == 0:
                 nums[p] = nums[q]
                 nums[q] = 0
-                q += 1
                 p += 1
-            else:
-                q += 1
+            elif nums[p] != 0:
                 p += 1
+            q += 1
                 
-                
-        
-        
-
 
 if __name__ == '__main__':
-    nums = [0,1,2,2,0,0,0,3,3,4,5]
+    nums = [1,0,1]
     Solution().moveZeroes(nums)
     print(nums)
 
