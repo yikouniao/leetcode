@@ -1,14 +1,26 @@
+# https://leetcode.com/problems/remove-element
+
+from typing import List
+
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
-        n = len(nums)
-        if n == 0:
-            return 0
-        p, q = 0, 0
-        while q < n:
-            while q < n and nums[q] == val:
-                q += 1
-            if q < n:
-                nums[p] = nums[q]
-                q += 1
-                p += 1
-        return p
+        i, j = 0, len(nums) - 1
+        while i <= j:
+            if nums[j] == val:
+                j -= 1
+            elif nums[i] == val:
+                nums[i] = nums[j]
+                nums[j] = val
+                j -= 1
+                i += 1
+            else:
+                i += 1
+        return j + 1
+        
+        
+
+
+if __name__ == '__main__':
+    print(Solution().removeElement([0,1,2,2,3,0,4,2], 2))
+
+
