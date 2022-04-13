@@ -4,16 +4,14 @@ from typing import List
 
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        p, q = 0, 1
-        while q < len(nums):
-            if nums[p] == nums[q]:
-                q += 1
-            else:
-                nums[p + 1] = nums[q]
-                q += 1
-                p += 1
-        return p + 1
-        
+        n = len(nums)
+        p1, p2 = 0, 1
+        while p2 < n:
+            if nums[p1] != nums[p2]:
+                p1 += 1
+                nums[p1] = nums[p2]
+            p2 += 1
+        return p1 + 1
 
 
 if __name__ == '__main__':
