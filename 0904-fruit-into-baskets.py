@@ -1,43 +1,28 @@
-import re
+
 from typing import *
-from unittest import result
 
 class Solution:
     def totalFruit(self, fruits: List[int]) -> int:
-        n = len(fruits)
-        if n <= 2:
-            return n
-        i, j = 0, 0
-        result = j - i + 1
-        a, b = fruits[0], fruits[0]
-        count_b = 1
-        j += 1
-        while j < n:
-            if fruits[j] == b:
+        a, b = -1, -1
+        result, curr_result, count_b = 0, 0, 0
+        for fruit in fruits:
+            if fruit != a and fruit != b:
+                curr_result = count_b + 1
+                result = max(result, curr_result)
+                count_b = 1
+                a, b = b, fruit
+            elif fruit == b:
+                curr_result += 1
+                result = max(result, curr_result)
                 count_b += 1
-                result = max(result, j - i + 1)
-                j += 1
-            elif fruits[j] == a:
-                count_b = 1
-                a = b
-                b = fruits[j]
-                result = max(result, j - i + 1)
-                j += 1
-            elif a != b:
-                i = j - count_b
-                result = max(result, count_b + 1)
-                count_b = 1
-                a = b
-                b = fruits[j]
-                j += 1
             else:
-                result = max(result, j - i + 1)
+                curr_result += 1
+                result = max(result, curr_result)
                 count_b = 1
-                b = fruits[j]
-                j += 1
+                a, b = b, a      
         return result
 
 if __name__ == '__main__':
-    list = [0,1,2,2]
+    list = [3,3,3,1,2,1,1,2,3,3,4]
     print(Solution().totalFruit(list))
     print(list)
